@@ -1,0 +1,8 @@
+# 本地数据 / 缓存
+*.db
+__pycache__/
+.DS_Store
+
+# WorkBuddy 项目记忆与标记
+.workbuddy/
+.wbapp_*.genie
