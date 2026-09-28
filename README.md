@@ -45,7 +45,7 @@ LEDGER_DB=./ledger.db ADMIN_PASSWORD=xxx python3 server/app.py   # 默认 0.0.0.
 python3 server/test_api.py
 ```
 
-> 注：前端当前发布版为纯本地存储形态；云同步后端的配套前端入口未在发布版中启用。
+> 注：仓库中的前端为纯本地存储形态。
 
 ## 部署
 

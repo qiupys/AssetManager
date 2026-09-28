@@ -315,6 +315,22 @@ async def put_data(req: Request):
     return {"ok": True, "updated": time.time()}
 
 
+# 静态资源兜底（须注册在所有 /api 路由之后、__main__ 之前）：仅允许常规前端
+# 扩展名，数据库等敏感文件永不外泄
+_STATIC_EXTS = {".html", ".js", ".css", ".svg", ".png", ".ico", ".webmanifest"}
+
+
+@app.get("/{fname}")
+async def static_any(fname: str):
+    safe = os.path.basename(fname)
+    if os.path.splitext(safe)[1].lower() not in _STATIC_EXTS:
+        return JSONResponse({"error": "not found"}, status_code=404)
+    path = os.path.join(ROOT, safe)
+    if not os.path.isfile(path):
+        return JSONResponse({"error": "not found"}, status_code=404)
+    return FileResponse(path)
+
+
 if __name__ == "__main__":
     import uvicorn
 
